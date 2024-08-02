@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <tilte>日記エントリー一覧</tilte>
+</head>
+<body>
+    <h1>日記エントリー一覧</h1>
+    <ul>
+        {% for entry in entries%}
+            <li>
+                <a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a>
+                <p>{{ entry.date_posted }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
