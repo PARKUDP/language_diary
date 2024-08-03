@@ -6,9 +6,10 @@
     <tilte>{{ entry.title }}</tilte>
 </head>
 <body>
-    <h1>{{ entry.title }}</h1>
-    <p>{{ entry.content }}</p>
+    <p><strong>日付</strong>
     <p>{{ entry.date_posted }}</p>
+    <p><strong>内容</strong></p>
+    <p>{{ entry.content }}</p>
     <a href="{%url 'entry_list' %}">戻る</a>
 </body>
 </html>

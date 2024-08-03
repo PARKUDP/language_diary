@@ -1,17 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <tilte>日記エントリー一覧</tilte>
+    <title>日記一覧</title>
+    <link rel="stylesheet" href="{% static 'entries/style.css' %}">
 </head>
 <body>
-    <h1>日記エントリー一覧</h1>
+    <h1>日記一覧</h1>
+    {% if user.is_authenticated %}
+        <p>はじめまして, {{ user.username }}!</p>
+        <a href="{% url 'entry_create' %}">日記作成</a>
+        <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+        <a href="{% url 'login' %}">ログイン</a>
+    {% endif %}
     <ul>
-        {% for entry in entries%}
+        {% for entry in entries %}
             <li>
                 <a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a>
                 <p>{{ entry.date_posted }}</p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'entry_update' entry.pk %}">編集</a>
+                    <form action="{% url 'entry_delete' entry.pk %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">削除</button>
+                    </form>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

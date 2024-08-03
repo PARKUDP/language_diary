@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除確認</title>
+</head>
+<body>
+    <h1>削除確認</h1>
+    <p> この{{ entry.title }}を削除しますか？</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">はい</button>
+    </form>
+    <a href="{% url 'entry_list' %}">いいえ</a>
+</body>
+</html>
