@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <tilte>{{ entry.title }}</tilte>
+    <title>{{ entry.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'entries/entry_list.css' %}">
 </head>
 <body>
-    <p><strong>日付</strong>
-    <p>{{ entry.date_posted }}</p>
-    <p><strong>内容</strong></p>
-    <p>{{ entry.content }}</p>
-    <a href="{%url 'entry_list' %}">戻る</a>
+    <div class="entry-detail">
+        <div class="content-box">
+            <div class="date">{{ entry.date_posted|date:"Y年m月d日 H:i" }}</div>
+            <div class="content">{{ entry.content }}</div>
+        </div>
+        <a href="{% url 'entry_list' %}">戻る</a>
+    </div>
 </body>
 </html>
