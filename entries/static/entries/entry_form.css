@@ -1,0 +1,60 @@
+/* タイトルと本文の入力欄のスタイル */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+/* フォーカス時のスタイル */
+input[type="text"]:focus, textarea:focus {
+    border: 1px solid #4CAF50;
+    outline: none;
+}
+
+/* フォーム全体のスタイル */
+form {
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ボタンのスタイル */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* ボタンのホバー時のスタイル */
+button:hover {
+    background-color: #45a049;
+}
+
+/* リンクのスタイル */
+a {
+    color: #555;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
