@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'entries/entry_list.css' %}">
 </head>
 <body>
-    <h1>日記一覧</h1>
+    <h1>{{ user.username }}の日記一覧</h1>
     {% if user.is_authenticated %}
         <p>はじめまして, {{ user.username }}!</p>
         <a href="{% url 'entry_create' %}">日記作成</a>
@@ -16,12 +16,13 @@
     {% else %}
         <a href="{% url 'login' %}">ログイン</a>
     {% endif %}
+    
     <ul>
         {% for entry in entries %}
             <li>
                 <a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a>
-                <p>{{ entry.date_posted }}</p>
-                {% if user.is_authenticated %}
+                <p>{{ entry.date_posted|date:"Y年m月d日 H:i" }}</p> <!-- 日付のフォーマットを日本語に -->
+                {% if user == entry.user %}  <!-- 現在のユーザーが作成者であるかを確認 -->
                     <a href="{% url 'entry_update' entry.pk %}">編集</a>
                     <form action="{% url 'entry_delete' entry.pk %}" method="post" style="display:inline;">
                         {% csrf_token %}
@@ -29,6 +30,8 @@
                     </form>
                 {% endif %}
             </li>
+        {% empty %}
+            <li>日記がありません。</li>
         {% endfor %}
     </ul>
 </body>
