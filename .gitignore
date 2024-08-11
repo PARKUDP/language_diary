@@ -1,0 +1,17 @@
+# .gitignore
+
+# Django関連
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# Python関連
+*.env
+.venv/
+*.log
+
+# IDE関連
+.vscode/
+.idea/
