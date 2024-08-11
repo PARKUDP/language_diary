@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="{% static 'accounts/login.css' %}">
 </head>
 <body>
-    <h2>ログイン</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">ログイン</button>
-    </form>
-    <p><a href="{% url 'signup' %}">サインアップはこちら</a></p>
+    <div class="form-container">
+        <h2>ログイン</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-green">ログイン</button>
+        </form>
+        <button onclick="window.location.href='{% url 'signup' %}'" class="btn-blue">会員登録はこちら</button>
+    </div>
 </body>
 </html>

@@ -35,49 +35,49 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     account_id = models.CharField(
-        verbose_name=_("account_id"),
+        verbose_name="アカウントID",
         unique=True,
         max_length=10,
     )
     email = models.EmailField(
-        verbose_name=_("email"),
+        verbose_name="メールアドレス",
         unique=True
     )
     first_name = models.CharField(
-        verbose_name=_("first_name"),
+        verbose_name="名",
         max_length=150,
         null=True,
         blank=False
     )
     last_name = models.CharField(
-        verbose_name=_("last_name"),
+        verbose_name="姓",
         max_length=150,
         null=True,
         blank=False
     )
     birth_date = models.DateField(
-        verbose_name=_("birth_date"),
+        verbose_name="生年月日",
         blank=True,
         null=True
     )
     is_superuser = models.BooleanField(
-        verbose_name=_("is_superuer"),
+        verbose_name="スーパーユーザー",
         default=False
     )
     is_staff = models.BooleanField(
-        verbose_name=_('staff status'),
+        verbose_name='スタッフステータス',
         default=False,
     )
     is_active = models.BooleanField(
-        verbose_name=_('active'),
+        verbose_name='アクティブ',
         default=True,
     )
     created_at = models.DateTimeField(
-        verbose_name=_("created_at"),
+        verbose_name="作成日",
         auto_now_add=True,
     )
     updated_at = models.DateTimeField(
-        verbose_name=_("updateded_at"),
+        verbose_name="更新日",
         auto_now=True
     )
 

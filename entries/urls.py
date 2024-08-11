@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.entry_create, name='entry_create'),
     path('<int:pk>/update/', views.entry_update, name='entry_update'),
     path('<int:pk>/delete/', views.entry_delete, name='entry_delete'),
+    path('public/', views.entry_list_public, name='entry_list_public'),  
 ]

@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サインアップ</title>
+    <title>会員登録</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'accounts/signup.css' %}">
 </head>
 <body>
-    <h2>サインアップ</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">サインアップ</button>
-    </form>
+    <div class="form-container">
+        <h2>会員登録</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-green">会員登録</button>
+        </form>
+        <p><a href="{% url 'login' %}" class="btn-blue">ログイン画面に戻る</a></p>
+    </div>
 </body>
 </html>

@@ -3,7 +3,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
 from django.http import HttpResponse
 from .forms import SignUpForm
-
+from django.contrib.auth import logout
+from django.views import View
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
 
@@ -18,11 +19,11 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+
 class CustomLogoutView(LogoutView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        return HttpResponse('Logged out successfully')
+        return redirect('login')  
 
     def get(self, request, *args, **kwargs):
-        # GETリクエストの場合、メッセージを表示する
-        return HttpResponse('This page should be accessed via POST method.')
+        return redirect('login')  

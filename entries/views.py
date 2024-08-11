@@ -7,11 +7,16 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def entry_list(request):
     entries = Entry.objects.filter(user=request.user).order_by('-date_posted')
-    return render(request, 'entries/entry_list.html', {'entries': entries})
+    context = {
+        'entries': entries,
+        'user': request.user,  # 明示的に user を渡す
+    }
+    return render(request, 'entries/entry_list.html', context)
+
 
 @login_required
 def entry_detail(request, pk):
-    entry = get_object_or_404(Entry, pk=pk, user=request.user)  # 現在のユーザーの日記のみを取得
+    entry = get_object_or_404(Entry, pk=pk)
     return render(request, 'entries/entry_detail.html', {'entry': entry})
 
 @login_required
@@ -46,3 +51,9 @@ def entry_delete(request, pk):
         entry.delete()
         return redirect('entry_list')
     return render(request, 'entries/entry_confirm_delete.html', {'entry': entry})
+
+@login_required
+def entry_list_public(request):
+    # 現在のユーザーの日記以外を取得
+    public_entries = Entry.objects.exclude(user=request.user).order_by('-date_posted')
+    return render(request, 'entries/entry_list_public.html', {'entries': public_entries})

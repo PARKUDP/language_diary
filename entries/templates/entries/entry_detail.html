@@ -1,19 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang='jp'>
+<html lang="jp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ entry.title }}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'entries/entry_list.css' %}">
+    <link rel="stylesheet" href="{% static 'entries/entry_detail.css' %}">
 </head>
 <body>
-    <div class="entry-detail">
-        <div class="content-box">
-            <div class="date">{{ entry.date_posted|date:"Y年m月d日 H:i" }}</div>
-            <div class="content">{{ entry.content }}</div>
-        </div>
-        <a href="{% url 'entry_list' %}">戻る</a>
-    </div>
+    <h1>{{ entry.title }}</h1>
+    <p>{{ entry.date_posted|date:"Y年m月d日 H:i" }}</p>
+    <p>{{ entry.content | linebreaksbr }}</p>
+
+    {% if user == entry.user %}
+        <a href="{% url 'entry_update' entry.pk %}">編集</a>
+        <form action="{% url 'entry_delete' entry.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+    <a href="{% url 'entry_list' %}">戻る</a>
 </body>
 </html>

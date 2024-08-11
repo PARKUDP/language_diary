@@ -4,21 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日記一覧</title>
+    <title>公開日記一覧</title>
     <link rel="stylesheet" href="{% static 'entries/entry_list.css' %}">
 </head>
 <body>
+    <h1>公開日記一覧</h1>
     {% if user.is_authenticated %}
-        <h1>あなたの日記一覧</h1>
+        <a href="{% url 'entry_list' %}">自分の日記一覧に戻る</a>
         <a href="{% url 'entry_create' %}">日記作成</a>
-        <a href="{% url 'entry_list_public' %}" style="margin-left: 20px;">他のユーザーの日記を参照する</a>
         <form method="post" action="{% url 'logout' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit">ログアウト</button>
         </form>
-    {% else %}
-        <p>ログインしてください。</p>
-        <a href="{% url 'login' %}">ログイン</a>
     {% endif %}
 
     <ul>
@@ -26,16 +23,9 @@
             <li>
                 <a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a>
                 <p>{{ entry.date_posted|date:"Y年m月d日 H:i" }}</p>
-                {% if user == entry.user %}
-                    <a href="{% url 'entry_update' entry.pk %}">編集</a>
-                    <form action="{% url 'entry_delete' entry.pk %}" method="post" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit">削除</button>
-                    </form>
-                {% endif %}
             </li>
         {% empty %}
-            <li>日記がありません。</li>
+            <li>公開日記がありません。</li>
         {% endfor %}
     </ul>
 </body>
